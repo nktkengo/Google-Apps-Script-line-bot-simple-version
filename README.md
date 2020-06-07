@@ -28,7 +28,7 @@
 （GAS側の制約に引っかかって大規模の処理には向いていない（大規模処理を行うのには、GASは向いていない））
 
 
-##参考文献  
+## 参考文献  
 こちらをベースとして作成させて頂きました。  
 [Messaging APIとGASを使ったLINE Botでグループチャットの活発化](https://qiita.com/MxShun/items/7a563a795d41cdc0f1dc)    
 [Google Apps Script](https://developers.google.com/apps-script)   
