@@ -1,6 +1,6 @@
 const CHANNEL_ACCESS_TOKEN = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
 const calender_id = 'xxxxx';
-const yesExp = /(y|yes|はい|ok|おｋ)/;
+const yesExp = /^(y|yes|はい|ok|おｋ)$/;
 
 function doPost(e) {
   const json = JSON.parse(e.postData.contents).events[0];
@@ -11,8 +11,8 @@ function doPost(e) {
   const Groupid = json.source.groupId;
 
   //regular expressions
-  const noExp = /(n|no|いいえ)/;
-  const clearExp = /(キャンセル|やめる)/;
+  const noExp = /^(n|no|いいえ)$/;
+  const clearExp = /^(キャンセル|やめる)$/;
   const followExp = /(follow|unfollow)/;
   const yearExp = /(19[0-9]{2}|20[0-9]{2})/;
   const dateExp = /([01][1-2]|[1][0-2]|[1-9])[\/月]([0][1-9]|[12][0-9]|3[01]|[1-9])/; //うるう年などには対応できない。
