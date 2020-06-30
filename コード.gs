@@ -70,6 +70,7 @@ function doPost(e) {
           differentMessages(replyToken);
         }
         break;
+        
       // 予定の開始時刻
       case '1':
         const matched1 = userMessage.match(hourMinExp);
@@ -84,6 +85,7 @@ function doPost(e) {
           differentMessages(replyToken);
         }
         break;
+        
       // 終了日付
       case '2':
         const matched2 = userMessage.match(dateExp);
@@ -98,6 +100,7 @@ function doPost(e) {
           differentMessages(replyToken);
         }
         break;
+        
       // 予定の終了時刻
       case '3':
         const matched3 = userMessage.match(hourMinExp);
@@ -113,6 +116,7 @@ function doPost(e) {
           differentMessages(replyToken);
         }
         break;
+        
       // 予定の名前
       case '4':
         const year = new Date().getFullYear();
@@ -122,6 +126,7 @@ function doPost(e) {
         const key5 = userID + 5;
         resisterPrivate(key5, userMessage);
         break;
+        
       // 予定の確認
       case '5':
         const matched4 = userMessage.match(yearExp);
@@ -143,16 +148,19 @@ function doPost(e) {
           differentMessages(replyToken);
         }
         break;
+        
       //実行(notchange = nul) case '5'の時にnotchange = nullで実行された場合こちらで実行。
       case '6':
         const notchange = null;
         storeCalender(userMessage, notchange, replyToken, userID);
         break;
+        
       //実行(notchange = 1)  case '5'の時にnotchange = 1で実行された場合こちらで実行。
       case '7':
         const notchange1 = 1;
         storeCalender(userMessage, notchange1, replyToken, userID);
         break;
+        
       // 匿名でグループに投稿する内容
       case '10':
         const numberExp = /[0-9]{1,2}/;
@@ -169,6 +177,7 @@ function doPost(e) {
           resisterPrivate(key1, replymessage);//送信するルームを登録する。
         }
         break;
+        
       // グループに投稿する内容の確認
       case '11':
         if (yesExp.test(userMessage)) {
@@ -181,6 +190,7 @@ function doPost(e) {
           deletecache()
         }
         break;
+        
       case '12':
         const message1 = userMessage + "\nで間違いないでしょうか？よろしければ「y」を、異なる場合は「n」と入力してください！\nグループに投稿をやめる場合は「キャンセル」と入力してください。"
         replyChatprivate(replyToken, message1);
@@ -188,6 +198,7 @@ function doPost(e) {
         resisterPrivate(key2, userMessage);//送信するdataを登録する
         resisterPrivate(userID, 13);
         break;
+        
       case '13':
         if (yesExp.test(userMessage)) {
           const key1 = userID + 1;
@@ -235,16 +246,16 @@ function storeCalender(userMessage, notchange, replyToken, userID) {
     if (targetIDExp.test(userID)) {
       //デバック用//errorMeaasege("突入");
       const [title, startDate, endDate] = createEventData(userID, notchange);
-      errorMeaasege(endDate);
+      //デバック用//errorMeaasege(endDate);
       CalendarApp.getCalendarById(CALENDER_ID).createEvent(title, startDate, endDate);
       const message = "予定を追加しました";
       replyChatprivate(replyToken, message);
       cleardata(userID);
     } else {
       const [title, startDate, endDate] = createEventData(userID, notchange);
-      errorMeaasege(title);
+      //デバック用//errorMeaasege(title);
       const startDATE = exchangeTIME(startDate);
-      errorMeaasege(startDATE);
+      //デバック用//errorMeaasege(startDATE);
       const endDATE = exchangeTIME(endDate);
       const url = generateURL(title, startDATE, endDATE);
       replyChatprivate(replyToken, url);
@@ -257,7 +268,7 @@ function storeCalender(userMessage, notchange, replyToken, userID) {
 
 //googleカレンダーのURLを発行する為に書式を変える。
 function exchangeTIME(startDate) {
-  errorMeaasege(startDate);
+  //デバック用//errorMeaasege(startDate);
   const startDATE =
     //文字列化しないといけない為、0を足して変形（0を足す必要がないことに途中で気づいたが、速度に問題を感じないため放置）
     startDate.getFullYear() + ("0" + (startDate.getMonth() + 1)).slice(-2) +
@@ -278,8 +289,8 @@ function createEventData(userID, notchange) {
 
   const setDate1 = year + "/" + retrivePrivate(userID + 1) + " " + retrivePrivate(userID + 2);
   const setDate2 = year + "/" + retrivePrivate(userID + 3) + " " + retrivePrivate(userID + 4);
-  errorMeaasege(setDate1);
-  errorMeaasege(setDate2);
+  //デバック用//errorMeaasege(setDate1);
+  //デバック用//errorMeaasege(setDate2);
   const startDate = new Date(setDate1);
   const endDate = new Date(setDate2);
   const title = retrivePrivate(userID + 5);
