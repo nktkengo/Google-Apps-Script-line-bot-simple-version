@@ -228,12 +228,12 @@ function differentMessages(replyToken) {
 //カレンダーに予定を追加する。
 //カレンダーに追加できない人は、URLを生成して、クリックで登録できるようになっている。
 function storeCalender(userMessage, notchange, replyToken, userID) {
-  errorMeaasege("突入");
+  //デバック用//errorMeaasege("突入");
   if (yesExp.test(userMessage)) {
-    errorMeaasege("突入");
+    //デバック用//errorMeaasege("突入");
     const targetIDExp = /xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/;//xxxを変更することで、他人に自分のカレンダに登録できないようにする。
     if (targetIDExp.test(userID)) {
-      errorMeaasege("突入");
+      //デバック用//errorMeaasege("突入");
       const [title, startDate, endDate] = createEventData(userID, notchange);
       errorMeaasege(endDate);
       CalendarApp.getCalendarById(CALENDER_ID).createEvent(title, startDate, endDate);
